@@ -2,66 +2,102 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>TCP (Transmission Control Protocol)</title>
+  <style>
+    body {font-family: 'Segoe UI', Tahoma, sans-serif; margin:0; background:#f4f6f8; color:#222;}
+    header {background:linear-gradient(90deg,#3b82f6,#06b6d4); color:#fff; padding:30px 20px; text-align:center;}
+    header h1 {margin:0; font-size:32px;}
+    header p {margin:8px 0 0; font-size:16px;}
+    main {max-width:1000px; margin:30px auto; padding:0 20px;}
+    section {background:#fff; border-radius:12px; padding:24px; margin-bottom:20px; box-shadow:0 4px 12px rgba(0,0,0,0.06);} 
+    h2 {color:#3b82f6; margin-top:0;}
+    h3 {color:#06b6d4; margin-top:18px;}
+    ul, dl {margin-left:20px;}
+    dt {font-weight:bold; margin-top:12px;}
+    img {max-width:100%; border-radius:10px; margin:16px 0;}
+    figure {margin:0; text-align:center;}
+    figure figcaption {font-size:14px; color:#555; margin-top:6px;}
+    footer {text-align:center; padding:16px; font-size:14px; color:#555;}
+  </style>
 </head>
 <body>
+  <header>
+    <h1>TCP (Transmission Control Protocol)</h1>
+    <p>โปรโตคอลควบคุมการส่งข้อมูลแบบมุ่งเน้นการเชื่อมต่อ ทำงานที่ชั้น Transport (Layer 4)</p>
+  </header>
 
-  <h1 align="center">TCP (Transmission Control Protocol)</h1>
-  <p align="center">โปรโตคอลควบคุมการส่งข้อมูลแบบมุ่งเน้นการเชื่อมต่อ ทำงานที่ชั้น Transport (Layer 4)</p>
+  <main>
+    <section>
+      <h2>ภาพรวม TCP</h2>
+      <p>TCP เป็นหนึ่งในโปรโตคอลหลักของชุดโปรโตคอล TCP/IP ทำงานร่วมกับ IP เพื่อให้การส่งข้อมูลมีความเชื่อถือได้และเป็นระเบียบ</p>
 
-  <hr>
+      <h3>การทำงานหลัก</h3>
+      <ul>
+        <li>การเชื่อมต่อ: ใช้ <strong>Three‑way handshake</strong> (SYN → SYN+ACK → ACK)</li>
+        <li>การปิดการเชื่อมต่อ: ใช้ <strong>Four‑way handshake</strong> (FIN → ACK → FIN → ACK)</li>
+        <li>ใช้ ACKs และ sequence number เพื่อยืนยันการรับ</li>
+        <li>ควบคุมการไหลด้วย sliding window</li>
+        <li>ควบคุมความแออัดด้วยอัลกอริธึม (slow start, fast retransmit ฯลฯ)</li>
+        <li>ตรวจสอบความถูกต้องด้วย checksum</li>
+      </ul>
 
-  <!-- ปุ่มเมนูคลิกเข้าหาส่วนต่างๆ -->
+      <figure>
+        <img src="https://www.ionos.co.uk/digitalguide/fileadmin/DigitalGuide/Schaubilder/EN-tcp.png" alt="การจับมือสามทาง TCP">
+        <figcaption>1.1 ภาพการจับมือสามทาง (Three-way handshake)</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>คุณสมบัติเด่น</h2>
+      <dl>
+        <dt>Segment Numbering</dt>
+        <dd>ติดตามลำดับข้อมูลด้วยการกำหนดหมายเลขเซกเมนต์</dd>
+        <dt>Connection Oriented</dt>
+        <dd>มีการเชื่อมต่อระหว่างผู้ส่งและผู้รับจนกว่าจะเสร็จสิ้น</dd>
+        <dt>Full Duplex</dt>
+        <dd>ส่งข้อมูลได้ทั้งสองทางพร้อมกัน</dd>
+        <dt>Flow Control</dt>
+        <dd>ป้องกันไม่ให้ข้อมูลล้นเครื่องรับ</dd>
+        <dt>Error Control</dt>
+        <dd>ตรวจสอบและส่งซ้ำหากข้อมูลสูญหายหรือเสียหาย</dd>
+        <dt>Congestion Control</dt>
+        <dd>จัดการปริมาณข้อมูลในเครือข่ายเพื่อลดการแออัด</dd>
+      </dl>
+      
+      <figure>
+        <img src="https://i0.wp.com/saixiii.com/wp-content/uploads/2017/05/tcpip.png?w=800&ssl=1" alt="คุณสมบัติของ TCP">
+        <figcaption>1.2 คุณสมบัติของ TCP</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>ข้อดีของ TCP</h2>
+      <ul>
+        <li>เชื่อถือได้ ตรวจสอบข้อผิดพลาดและกู้คืนข้อมูลได้</li>
+        <li>ควบคุมการไหลและป้องกันความแออัด</li>
+        <li>ข้อมูลถึงปลายทางตามลำดับ</li>
+        <li>ใช้งานแพร่หลาย และได้รับการมาตรฐานโดย IETF</li>
+        <li>ทำงานคู่กับ IP เพื่อให้บริการเครือข่ายที่เชื่อถือได้</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>ข้อเสียของ TCP</h2>
+      <ul>
+        <li>ขนาดใหญ่ อาจไม่เหมาะกับเครือข่ายขนาดเล็ก</li>
+        <li>ลดความเร็วของเครือข่ายบางกรณี</li>
+        <li>ไม่สามารถใช้กับโปรโตคอลอื่นนอกเหนือ TCP/IP ได้</li>
+        <li>ถูกพัฒนามานาน จึงมีข้อจำกัดบางประการ</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
   <center>
-    <marquee behavior="alternate" scrollamount="5" width="80%">
-      <a href="#overview">ภาพรวม TCP</a> |
-      <a href="#features">คุณสมบัติเด่น</a> |
-      <a href="#pros">ข้อดี</a> |
-      <a href="#cons">ข้อเสีย</a> |
-      <a href="#author">ผู้จัดทำ</a>
-    </marquee>
+    <p><b>ผู้จัดทำ</b></p>
+    <h2>นายอันดามัน มีพยุง 680406400631</h2>
+    <h2>นางสาวภัทรวดี เรืองชม 680406401794</h2>
+    <h2>นางสาวเบญจรัตน์ บัวคลี่ 680406402880</h2>
   </center>
-
-  <hr>
-
-  <h2 id="overview">ภาพรวม TCP</h2>
-  <p>TCP เป็นหนึ่งในโปรโตคอลหลักของชุดโปรโตคอล TCP/IP ทำงานร่วมกับ IP เพื่อให้การส่งข้อมูลมีความเชื่อถือได้และเป็นระเบียบ</p>
-
-  <h2 id="features">คุณสมบัติเด่น</h2>
-  <ul>
-    <li>Segment Numbering</li>
-    <li>Connection Oriented</li>
-    <li>Full Duplex</li>
-    <li>Flow Control</li>
-    <li>Error Control</li>
-    <li>Congestion Control</li>
-  </ul>
-
-  <h2 id="pros">ข้อดีของ TCP</h2>
-  <ul>
-    <li>เชื่อถือได้ ตรวจสอบข้อผิดพลาดและกู้คืนข้อมูลได้</li>
-    <li>ควบคุมการไหลและป้องกันความแออัด</li>
-    <li>ข้อมูลถึงปลายทางตามลำดับ</li>
-    <li>ใช้งานแพร่หลาย</li>
-  </ul>
-
-  <h2 id="cons">ข้อเสียของ TCP</h2>
-  <ul>
-    <li>ขนาดใหญ่ อาจไม่เหมาะกับเครือข่ายขนาดเล็ก</li>
-    <li>ลดความเร็วของเครือข่ายบางกรณี</li>
-    <li>ไม่สามารถใช้กับโปรโตคอลอื่นนอกเหนือ TCP/IP ได้</li>
-    <li>ถูกพัฒนามานาน จึงมีข้อจำกัดบางประการ</li>
-  </ul>
-
-  <hr>
-
-  <!-- ส่วนผู้จัดทำ -->
-  <h2 id="author" align="center">ผู้จัดทำ</h2>
-  <marquee direction="up" scrollamount="2" height="100">
-    <p align="center">นายอันดามัน มีพยุง 680406400631</p>
-    <p align="center">นางสาวภัทรวดี เรืองชม 680406401794</p>
-    <p align="center">นางสาวเบญจรัตน์ บัวคลี่ 680406402880</p>
-  </marquee>
-
-</body>
-</html>
+</footer>
